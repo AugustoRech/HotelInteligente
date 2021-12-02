@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HotelInteligente</string>
+    <string name="ButtonName">CONECTAR AO BLUETOOTH</string>
+    <string name="WelcomeMessage">Olá hospede, \nConecte seu bluetooth.</string>
+</resources>
