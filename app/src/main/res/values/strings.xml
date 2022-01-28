@@ -2,4 +2,21 @@
     <string name="app_name">HotelInteligente</string>
     <string name="ButtonName">CONECTAR AO BLUETOOTH</string>
     <string name="WelcomeMessage">Olá hospede, \nConecte seu bluetooth.</string>
+    <string name="DevicesLabel">Dispositivos</string>
+    <string name="ErrorNoBluetooth">Este aplicativo funciona apenas com conexão bluetooth.</string>
+    <string name="SuccessBluetoothEnable">O seu bluetooth foi ligado com sucesso!</string>
+    <string name="ErrorDeviceDoesNotSupportBluetooth">Seu dispositivo não tem suporte a bluetooth!</string>
+    <string name="DevicesListTitle">Dispositivos</string>
+    <string name="ErrorDevicesNotFound">Não foi encontrado nenhum despositivo conectado ao seu bluetooth.</string>
+    <string name="ConnectDialogError">Ocorreu um erro ao tentar se conectar.</string>
+    <string name="RainButtonDescription">Botão onde você pode ver se está chovendo ou não</string>
+    <string name="LedButtonDescription">Botão onde você pode ligar ou desligar as luzes</string>
+    <string name="FireAlertButtonDescription">Aviso para ver se há fumaça ou gases tóxicos no quarto</string>
+    <string name="AirButtonDescription">Ligue ou desligue o ventilador</string>
+    <string name="ReadDataDefault">Nenhum dado recebido</string>
+    <string name="WriteDataDefault">Nenhum dado enviado</string>
+    <string name="BluetoothConnectDeviceError">Ocorreu um erro ao tentar conectar ao bluetooth</string>
+    <string name="DeviceSocketConnectError">Ocorreu um erro ao tentar estabelecer uma conexão com o dispositivo</string>
+    <string name="humidity">Umidade:</string>
+    <string name="Temperature">Temperatura:</string>
 </resources>

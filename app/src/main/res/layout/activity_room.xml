@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_shadow_start_color"
+    tools:context=".RoomActivity">
+
+    <View
+        android:id="@+id/help_bar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/led_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_baseline_highlight_low"
+        android:contentDescription="@string/LedButtonDescription"
+        app:layout_constraintBottom_toBottomOf="@id/help_bar"
+        app:layout_constraintEnd_toStartOf="@id/rain_button"
+        app:layout_constraintStart_toStartOf="@id/help_bar"
+        app:layout_constraintTop_toTopOf="@id/help_bar" />
+
+    <ImageButton
+        android:id="@+id/rain_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_baseline_cloud_queue_norain"
+        android:contentDescription="@string/RainButtonDescription"
+        app:layout_constraintBottom_toBottomOf="@id/help_bar"
+        app:layout_constraintEnd_toStartOf="@id/fire_alert_button"
+        app:layout_constraintStart_toEndOf="@id/led_button"
+        app:layout_constraintTop_toTopOf="@id/help_bar" />
+
+    <ImageButton
+        android:id="@+id/fire_alert_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_baseline_warning_fire"
+        android:contentDescription="@string/FireAlertButtonDescription"
+        app:layout_constraintBottom_toBottomOf="@id/help_bar"
+        app:layout_constraintEnd_toStartOf="@id/air_button"
+        app:layout_constraintStart_toEndOf="@id/rain_button"
+        app:layout_constraintTop_toTopOf="@id/help_bar" />
+
+    <ImageButton
+        android:id="@+id/air_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_baseline_airoff"
+        android:contentDescription="@string/AirButtonDescription"
+        app:layout_constraintBottom_toBottomOf="@id/help_bar"
+        app:layout_constraintEnd_toStartOf="@id/lock_button"
+        app:layout_constraintStart_toEndOf="@id/fire_alert_button"
+        app:layout_constraintTop_toTopOf="@id/help_bar" />
+
+    <ImageButton
+        android:id="@+id/lock_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_baseline_lock"
+        android:contentDescription="@string/AirButtonDescription"
+        app:layout_constraintBottom_toBottomOf="@id/help_bar"
+        app:layout_constraintEnd_toEndOf="@id/help_bar"
+        app:layout_constraintStart_toEndOf="@id/air_button"
+        app:layout_constraintTop_toTopOf="@id/help_bar" />
+
+
+    <TextView
+        android:id="@+id/temperature_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/Temperature"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/help_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/temperature_progress_bar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cpb_background_progressbar_color="@color/purple_700"
+        app:cpb_progress="20"
+        app:cpb_progress_direction="to_right"
+        app:cpb_progress_max="100"
+        app:cpb_progressbar_color="@color/white"
+        app:cpb_progressbar_width="10dp"
+        app:cpb_start_angle="200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temperature_display" />
+
+    <TextView
+        android:id="@+id/temperature_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="12°C"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
+        app:cpb_progress_direction="to_right"
+        app:layout_constraintEnd_toEndOf="@id/temperature_progress_bar"
+        app:layout_constraintStart_toStartOf="@id/temperature_progress_bar"
+        app:layout_constraintTop_toTopOf="@id/temperature_progress_bar"
+        app:layout_constraintBottom_toBottomOf="@id/temperature_progress_bar"
+         />
+
+    <TextView
+        android:id="@+id/humidity_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/humidity"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/temperature_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/humidity_progress_bar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cpb_background_progressbar_color="@color/purple_700"
+        app:cpb_progress="20"
+        app:cpb_progress_direction="to_right"
+        app:cpb_progress_max="100"
+        app:cpb_progressbar_color="@color/white"
+        app:cpb_progressbar_width="10dp"
+        app:cpb_start_angle="200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/humidity_display" />
+
+    <TextView
+        android:id="@+id/humidity_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="10%"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@id/humidity_progress_bar"
+        app:layout_constraintStart_toStartOf="@id/humidity_progress_bar"
+        app:layout_constraintTop_toTopOf="@id/humidity_progress_bar"
+        app:layout_constraintBottom_toBottomOf="@id/humidity_progress_bar"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

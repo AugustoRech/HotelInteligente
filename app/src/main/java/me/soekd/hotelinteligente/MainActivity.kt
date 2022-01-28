@@ -1,24 +1,24 @@
 package me.soekd.hotelinteligente
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
 
         // Request code aleatório para verificar se o bluetooth foi ativado.
-        const val REQUEST_ENABLE_BT = 103
+        private const val REQUEST_ENABLE_BT = 103
+//        private const val REQUEST_CONNECTION = 104
 
     }
-
-    var bluetoothConnected = false
-
 
     lateinit var buttonBluetoothConnect: Button
 
@@ -36,15 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         buttonBluetoothConnect = findViewById(R.id.button_connect)
 
-        buttonBluetoothConnect.setOnClickListener { view ->
-
-            if (bluetoothConnected) {
-
-            } else {
-
-            }
-
-        }
+        buttonBluetoothConnect.setOnClickListener { view -> showDevices() }
 
         /*
 
@@ -59,7 +51,11 @@ class MainActivity : AppCompatActivity() {
         when {
             //
             mBluetoothAdapter == null ->
-                Toast.makeText(applicationContext, "Seu dispositivo não tem suporte a bluetooth!", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.ErrorDeviceDoesNotSupportBluetooth),
+                    Toast.LENGTH_LONG
+                ).show()
             !mBluetoothAdapter!!.isEnabled -> {
                 // se não estiver ativado vamos obriga-lo a ativar...
                 val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
@@ -76,30 +72,74 @@ class MainActivity : AppCompatActivity() {
 
         // Verificando os callbacks.
         when (requestCode) {
-
             REQUEST_ENABLE_BT -> {
-
                 if (resultCode == Activity.RESULT_OK) {
                     Toast.makeText(
                         applicationContext,
-                        "O seu bluetooth foi ligado com sucesso!",
+                        getString(R.string.SuccessBluetoothEnable),
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
                     Toast.makeText(
                         applicationContext,
-                        "Este aplicativo funciona apenas com conexão bluetooth.",
+                        getString(R.string.ErrorNoBluetooth),
                         Toast.LENGTH_LONG
                     ).show()
 
                     // desliga tudo
                     finish()
                 }
+            }
+        }
+    }
 
+    private fun showDevices() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.DevicesListTitle))
+
+        val devices: Set<BluetoothDevice> = mBluetoothAdapter?.bondedDevices ?: setOf()
+
+        // Caso não tenha nenhum dispositivo pareado, retornar e mandar msg de aviso
+        if (devices.isEmpty()) {
+            Toast.makeText(
+                applicationContext,
+                getString(R.string.ErrorDevicesNotFound),
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
+        // Pegar todos dispositivos e transforma-lo em uma lista
+        val devicesToShow = devices.map { "${it.name}\n${it.address}" }.toTypedArray()
+
+        // Callback para pegar o dispositivo desejado
+        builder.setItems(devicesToShow) { dialog, slot ->
+            try {
+                val deviceSignature = devicesToShow[slot]
+
+                // Este é o mac que precisamos, agora só preciamos mandar para a activity onde vai ficar tudo.
+                val mac = deviceSignature.split("\n")[1]
+
+                val intent = Intent(this, RoomActivity::class.java)
+
+                // Enviando para o mac para a RoomActivity
+                intent.putExtra("mac", mac)
+
+                // Iniciando...
+                startActivity(intent)
+
+            } catch (exception: Exception) {
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.ConnectDialogError),
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
         }
 
+        val dialog = builder.create()
+        dialog.show()
     }
 
 }
